@@ -18,7 +18,7 @@ Models are calibrated using historical returns only and priced under a risk-neut
 
 - No option-chain data used
 
-The market price of risk parameter is set to zero ($𝜆_𝑄 = 0$), as it is not identifiable without option prices
+The market price of risk parameter is set to zero ($𝜆_𝑄 = 0$), as it is not identifiable without option prices.
 
 # Models
 **GARCH(1,1):**
@@ -27,7 +27,7 @@ $ℎ_𝑡 = 𝜔 + 𝛼 𝜀_{t-1}^2 + 𝛽h_{t-1}$​
 **NGARCH:**
 $ℎ_𝑡 = 𝜔 + 𝛽ℎ_{𝑡−1} + 𝛼ℎ_{𝑡−1}(𝑧_{𝑡−1} − 𝜃)^2$
 
-NGARCH introduces the parameter 𝜃, allowing volatility to respond asymmetrically to positive and negative shocks (“leverage effect”)
+NGARCH introduces the parameter 𝜃, allowing volatility to respond asymmetrically to positive and negative shocks (“leverage effect”).
 
 # Experimental Design
 
@@ -47,11 +47,11 @@ To highlight when NGARCH does and does not matter, four scenarios are evaluated 
 
 **All simulations:**
 
-- use the same pricing date for GARCH and NGARCH
+- Use the same pricing date for GARCH and NGARCH
 
-- enforce the martingale condition
+- Enforce the martingale condition
 
-- are evaluated via terminal distributions and discounted payoffs
+- Are evaluated via terminal distributions and discounted payoffs
 
 # Results
 
@@ -67,7 +67,7 @@ To highlight when NGARCH does and does not matter, four scenarios are evaluated 
 - Estimated NGARCH asymmetry parameter 𝜃 is small
 
 **Interpretation:**
-In a low-volatility regime with weak asymmetry, NGARCH collapses effectively to GARCH. No meaningful distributional advantage is expected or observed
+In a low-volatility regime with weak asymmetry, NGARCH collapses effectively to GARCH. No meaningful distributional advantage is expected or observed.
 
 **OTM, 126 days**
 
@@ -78,7 +78,8 @@ In a low-volatility regime with weak asymmetry, NGARCH collapses effectively to 
 - Differences are dominated by Monte Carlo noise rather than structural effects
 
 **Interpretation:**
-Even with longer maturity and tail-sensitive strikes, asymmetric volatility dynamics do not materially affect pricing when recent history lacks strong leverage effects
+
+Even with longer maturity and tail-sensitive strikes, asymmetric volatility dynamics do not materially affect pricing when recent history lacks strong leverage effects.
 
 **2. 2022-06-13 (Stressed Regime)
 ATM, 21 days**
@@ -89,30 +90,30 @@ ATM, 21 days**
 - Differences are visible but modest at short horizons
 
 **Interpretation:**
-Short maturity limits the time for asymmetric volatility dynamics to propagate
+
+Short maturity limits the time for asymmetric volatility dynamics to propagate.
 
 **OTM, 126 days**
 
-- NGARCH exhibits a visibly wider right tail in the terminal log returns distribution
+- NGARCH produces a more concentrated central mass of log-returns than GARCH with fewer paths crossing the strike for OTM options and a more concentrated discounted payoff distribution near zero
 
-- Higher dispersion and fatter tails relative to GARCH
+- Contrary to a naïve expectation of uniformly fatter tails, NGARCH’s log-return distribution is narrower at high quantiles
 
-- Discounted payoff distribution shows greater mass in extreme outcomes
-
-- Realised outcome lies deeper in the NGARCH distribution than under GARCH
+- This reflects selective volatility amplification: most paths experience lower realised variance, whilst a small subset experiences pronounced volatility increases
 
 **Interpretation:**
-In stressed regimes, asymmetric volatility dynamics accumulate over longer horizons, materially affecting tail-sensitive option payoffs. This is the regime where NGARCH provides clear additional flexibility over GARCH
+
+NGARCH does not mechanically increase unconditional tail width. Instead, it reallocates risk dynamically, producing a peaked distribution with rare but severe volatility episodes. In stressed regimes, this leads to materially different terminal and payoff distributions even when overall log-return dispersion is lower.
 
 # Key Takeaways
 
-- NGARCH does not systematically outperform GARCH in calm regimes
+- NGARCH does not systematically differ from GARCH in calm regimes
 
 - Differences between models are regime-dependent
 
-- NGARCH’s advantage emerges when recent returns contain sustained negative shocks, and the contract is sensitive to tail behaviour (OTM, longer maturity)
+- Difference in NGARCH’s behaviour emerges when recent returns contain sustained negative shocks, and the contract is sensitive to tail behaviour
 
-- Without option price data, improvements appear in distributional shape, not in payoff-based RMSE or MAE
+- Without option price data, changes appear in distributional shape, not in payoff-based RMSE or MAE
 
 - These findings are consistent with theoretical expectations
 
